@@ -80,6 +80,51 @@ body
 	text-decoration:none;
 }
 
+
+#gmenu
+{
+	z-index: 1;
+        position: relative;
+        margin: 10px 5px;
+        padding: 0 5px;
+        border-right: 1px solid #6399cd;
+        background-color: white;
+        height: auto;
+        width: 10%;
+        float: left;
+}
+
+#gmenu h3 h4 h5 h6 p
+{
+	color: #6399cd;;
+	line-height: .2em;
+}
+
+
+#gmenu ul li a:hover, #gmenu ul li.active a 
+{color: #6399cd;
+     background-color:#eff4fa;
+     text-decoration: none;
+}
+
+#mainmenu ul li a
+{
+	color:#ffffff;
+	background-color:transparent;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	padding:5px 8px;
+}
+
+#mainmenu ul li a:hover, #mainmenu ul li.active a
+{
+	color: #6399cd;
+	background-color:#EFF4FA;
+	text-decoration:none;
+}
+
+
 div.flash-error, div.flash-notice, div.flash-success
 {
 	padding:.8em;
