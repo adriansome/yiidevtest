@@ -7,6 +7,7 @@ class StoreController extends Controller
 	{
             echo $this->message = 'hello from store index';
 		$this->render('index', array('content'=>$this->message));
+                
 	}
         
         public function actionBrowse()
@@ -45,20 +46,67 @@ class StoreController extends Controller
          public $content;
         public function actionDetails()
 	{
-              if(isset($_GET["album"]))
+              if(isset($_GET["albid"]))
             {
+                  /*
+                   *  Method 1 was devised from a membership tutorial
+                   * because I did not think the musicstore tutorial covered a detailed view option
+                   *  however method 2 was introduced much later in the musicstore tutorial
+                   * so I reverted to method 2
+                   */
+                  
+              /*      //Method 1
            $albumId = $_GET["album"];
               $query = Album::model()->findByPK($albumId);
               $this->title = $query->Title;        
-             $this->render('index', array('title'=>$this->title));
-             
+             $this->render('index', ar
+             ray('title'=>$this->title));
+                 */
+               
+                  //Method 2
+                  
+                  $albumCriteria = new CDbCriteria();
+                  $albumCriteria->select = "*";
+                  $albumCriteria->condition = "AlbumId = ".$_GET['albid'];
+                  $this->render('index', array('Albums'=>Album::model()->findAll($albumCriteria)))
+                  ;
+                echo 'error';
+                
+                  
+                  
                //$query = Customername::model()->findByPK(2);
             //$this->firstname = $query->firstName;
 		//$this->render('index', array('firstname'=>$this->firstname));
                 
             }
+                else{           
+            $this->message = 'hello from action album';
+		$this->render('index', array('content'=>$this->message));
+	}
          
 	}
+        
+        public function actionArtistDetails(){
+            
+           if($_GET['artistid'])
+           {
+               echo 'gggggggg'.$_GET['artistid'];
+               $artistCriteria = new CDbCriteria();
+               $artistCriteria->select = "*";
+               $artistCriteria->condition = "ArtistId = ".$_GET['artistid'];
+               $this->render("index", array("Artists"=>Artist::model()->findAll($artistCriteria)));
+     
+               
+           }
+                  else{           
+            $this->message = 'please select an artist to view their deatali artist details';
+		$this->render('index', array('content'=>$this->message));
+	}
+            
+      }
+      
+        
+        
 
 	// Uncomment the following methods and override them if needed
 	/*

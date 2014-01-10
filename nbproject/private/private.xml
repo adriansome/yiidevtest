@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/wamp/www/yiidevtest/protected/models/Genre.php</file>
+        <file>file:/C:/wamp/www/yiidevtest/protected/controllers/StoreController.php</file>
+        <file>file:/C:/wamp/www/yiidevtest/protected/views/store/index.php</file>
+        <file>file:/C:/wamp/www/yiidevtest/css/screen.css</file>
+        <file>file:/C:/wamp/www/yiidevtest/protected/views/site/index.php</file>
+    </open-files>
 </project-private>

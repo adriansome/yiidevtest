@@ -1,88 +1,96 @@
+
 <?php
-/* @var $this StoreController */
-
 $this->breadcrumbs=array(
-	'Store',
+        'Store',
 );
-
-
 ?>
-
-<p>
-	You may change the content of this page by modifying
-	the file <tt><?php echo __FILE__; ?></tt>.
-</p>
-
-<h1><em><?php echo CHtml::encode(Yii::app()->name); ?></em></h1><br/>
+<img
+        src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png" />
+        <h1><em><?php echo CHtml::encode(Yii::app()->name); ?></em></h1>
 
 <?php if(isset($_GET['gid'])){
-    foreach($Genres as $Genre){
-        echo '<h1>'.$Genre->Name.'</h1><br/>';
-        $desc = $Genre->Description;
-        
-    }
-    
-   ?> 
-   
+        foreach ($Genres as $Genre){
+                echo '<h1>' . $Genre->Name . "</h1><br />";
+                $desc = $Genre->Description;
+}
+
+ 
+        ?>
+
 <div id="gmenu">
-    <?php echo $desc; ?>
     
-</div>
+    <?php echo $desc; ?></div>
+
 <table>
-    <tr>
-        <?php $cntrow=0;
-        foreach($Albums as $Album){
-            $aid = $Album->ArtistId;
-            $cntrow++;
-            if($cntrow %2){
-                echo "</tr><tr>";
-                foreach($Artists as $Artist){
-                    if($Artist->ArtistId = $aid){
-                        
-                        $aname = $Artist->Name.'<br/>';
-                        
-                    }
+        <tr>
+        <?php
+        $cntRow = 0;     
+        foreach($Albums as $Album)
+        {
+                $aid = $Album->ArtistId;
+                $cntRow++;
+                if($cntRow % 2) echo "</tr><tr>";
+                foreach ($Artists as $Artist){
+                        if($Artist->ArtistId === $aid){
+                                $aname = $Artist->Name . "<br />";
+                        }
                 }
-                echo "<td><center><strong>".$aname."</strong>";
-                echo CHtml::link('<img src="'.Yii::app()->request->baseUrl.$Album->AlbumArtUrl.'"/><br/>', array('store/details/', 'album'=>$Album->AlbumId));
-                echo $Album->Title."<br/>".$Album->Price."</center></td>";           
-            }
-               ?>
-    </tr> 
-    
-    
+                echo "<td><center><strong>" . CHtml::link($aname, array('/Store/ArtistDetails/', 'artistid'=>$aid)) . "</strong>";
+                echo CHtml::link('<img src="' . Yii::app()->request->baseUrl . $Album->AlbumArtUrl . '" /><br />', array('store/details/', 'albid' => $Album->AlbumId, 'aid'=>$aid));
+                echo $Album->Title . "<br />" . $Album->Price . "</center></td>";
+        }
+        ?>
+        </tr>
+        
 </table>
 
-<?php } }
+<?php }
+        elseif(isset($_GET["albid"]) && isset($_GET["aid"])){
+                foreach($Artists as $Artist){
+                        $aname = $Artist->Name;
+                        $abio = $Artist->bio;
+                }
+                foreach($Albums as $Album){
+                        $title = $Album->Title;
+                        $tracks = $Album->tracks;
+                        $price = $Album->Price;
+                        $albid = $Album->AlbumId;
+                        $aid = $Album->ArtistId;
+                        $lnotes = $Album->LinerNotes;
+                        $AlbumArtLargeUrl = $Album->AlbumArtLargeUrl;
+                } ?>
+<h1><?php echo CHtml::link($aname, array('/Store/ArtistDetails/', 'artistid'=>$aid)); ?></h1>
+<table>
+        <tr>
+                <td valign="top"><?php echo '<img src="' . Yii::app()->request->baseUrl . $AlbumArtLargeUrl . '"  /><br /></td>'; ?>
+                <td></td>
+                <td valign="top"><?php echo "<h4>TRACKS</h4>" . $tracks; ?></td>
+        
+        </tr>
+        <tr>
+                <td valign="top"><?php echo $title . "<br />"; 
+                echo $price . "<br />";
+                echo CHtml::link('Add to Cart', array('/ShoppingCart/', 'albid'=>$albid, 'aid'=>$aid)) . "<br />"; ?>
+                </td>
+        </tr>
+</table>
+                <?php echo '<h3>Liner Notes</h3>' . $lnotes; ?>
+                <?php
+        }       
+        elseif(isset($_GET['artistid'])){
+            print_r($Artist);
+                foreach($Artists as $Artist){
+                    
+                        $aname = $Artist->Name;
+                        $abio = $Artist->bio;
+                        $artistArtlUrl = $Artist->ArtistGraphicUrl;
+                } ?>
+<h1><?php echo $aname; ?></h1>
+<?php echo '<img style="float:left; margin: 0 5px 5px 0;" src="' . Yii::app()->request->baseUrl . $artistArtlUrl . '"  /><br /></td>'; ?>
+<?php echo "<h4>Bio</h4>" . $abio; ?>   
 
-elseif(isset($_GET["Album"]))
-{
- foreach($Albums as $Album) {
-     echo '<img src="'.Yii::app()->requested->baseUrl.$Album->AlbumArtUrl.'"><br/>';
-     echo $Album->Title."<br/>";
-      echo $Album->Price."<br/>";
-    echo CHtml::link('Add to Cart', array('store/cart/', 'album'=>$Album->AlbumId));
- }  
-    
-    
-    
+<?php } else {
+     echo "<h1>" . $this->id . '/' . $this->action->id . "</h1>";
+
 }
-else{
-    ?>
-<h1><?php echo $this->id . '/' . $this->action->id; ?></h1><br/>
-
-
-
-
-
-<?php } ?>
-
-<?php
-if(isset($_GET["album"]))
-{
-
-echo 'the title'.$title;
-
-}
-
 ?>

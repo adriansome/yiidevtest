@@ -12,6 +12,8 @@ $this->pageTitle=Yii::app()->name;
 <?php endforeach; ?>
 
 </div>
+<center>
+    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/home-showcase.png"/></center>
 
 <p>Congratulations! You have successfully created your Yii application.</p>
 
